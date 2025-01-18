@@ -1,4 +1,5 @@
 import "./App.css";
+import { Main } from "./components/Main";
 import { Nav } from "./components/Nav";
 
 function App() {
@@ -6,7 +7,7 @@ function App() {
     <div className="App flex flex-col min-h-screen">
       <Nav />
       <header className="App-header flex flex-col items-center justify-centerp-6 sm:p-10">
-        
+        <Main />
       </header>
     </div>
   );

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "category": "Luxury",
+    "image": "https://i.ebayimg.com/00/s/NTUyWDU1Mw==/z/dLAAAOSw3tpmVtNS/$_1.JPG"
+  },
+  {
+    "id": 2,
+    "category": "Sneakers",
+    "image": "https://ir.ebaystatic.com/cr/v/c01/02_PopularDestination_Sneakers.jpg"
+  },
+  {
+    "id": 3,
+    "category": "P&A",
+    "image": "https://ir.ebaystatic.com/cr/v/c01/03_PopularDestination_Tire.jpg"
+  },
+  {
+    "id": 4,
+    "category": "Refurbished",
+    "image": "https://ir.ebaystatic.com/cr/v/c01/ECM_PopularDestination_Reburbished.jpg"
+  },
+  {
+    "id": 5,
+    "category": "Trading cards",
+    "image": "https://ir.ebaystatic.com/cr/v/c01/05_PopularDestination_Cards.jpg"
+  },
+
+  {
+    "id": 6,
+    "category": "Pre-loved Luxury",
+    "image": "https://ir.ebaystatic.com/cr/v/c01/06_PopularDestination_PreLoved.jpg"
+  },
+  {
+    "id": 7,
+    "category": "Toys",
+    "image": "https://ir.ebaystatic.com/cr/v/c01/07_PopularDestination_Toys.jpg"
+  }
+]
