@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Im
 import "./App.css";
 import { Main } from "./components/Main";
 import { Nav } from "./components/Nav";
+import NotFound from "./utils/NotFound";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/seller" />
             <Route path="/buyer" />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </header>
       </div>
