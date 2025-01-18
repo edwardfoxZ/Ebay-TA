@@ -8,8 +8,8 @@ export const Nav = () => {
   return (
     <nav className="w-full flex flex-col text-sm">
       {/* Top Navigation */}
-      <div className="flex flex-col md:flex-row max-lg:text-[10px] max-lg:flex-col justify-between items-center px-4 py-3 border-b border-gray-300">
-        <div className="flex items-center gap-4 max-lg:w-full">
+      <div className="flex flex-col md:flex-row sm:text-2xl max-lg:text-[10px] md:text-xs max-lg:flex-col justify-between items-center px-4 py-3 border-b border-gray-300">
+        <div className="flex items-center gap-4 md:items-center">
           <p className="flex gap-1">
             Hi!
             <a href="#" className={underlineBlueForLink}>
@@ -53,7 +53,7 @@ export const Nav = () => {
       </div>
 
       {/* Logo and Search Bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between px-4 py-5 gap-5">
+      <div className="flex flex-col md:flex-row items-center justify-between px-4 py-5 gap-5 border-b border-gray-300">
         <EbayLogo />
         <div className="flex items-center gap-3 w-full md:max-w-4xl">
           <div className="relative flex-grow max-lg:text-[10px]">
@@ -66,9 +66,6 @@ export const Nav = () => {
           </div>
           <button className="bg-[#0075c6] hover:bg-[#3628e5] text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 max-lg:text-[10px]">
             Search
-          </button>
-          <button className="bg-[#00c6b9] hover:bg-[#1d9b66] text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 max-lg:text-[10px]">
-            Connect
           </button>
         </div>
       </div>
