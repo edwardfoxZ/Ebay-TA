@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { SellOptions } from "../components/SellOptions";
+import Web3 from "web3";
 
-export const Sell = () => {
+export const Sell = ({ provider, contract }) => {
+  const [userAuctions, setUserAuctions] = useState([]);
+  const [web3, setWeb3] = useState(null);
+
+  useEffect(() => {
+    const fetchUserAuctions = async () => {
+      if (provider) {
+        try {
+          const web3 = new Web3(provider);
+          const accounts = await web3.eth.getAccounts();
+          const sender = accounts[0];
+
+          const userAuctions = await contract.methods
+            .getUsersAuctions(sender)
+            .call();
+          setUserAuctions(userAuctions);
+          setWeb3(web3);
+          console.log("fetch user Auctions successfully: ", userAuctions);
+        } catch (error) {
+          console.error(error);
+          alert("Error fetching user Auctions", error);
+        }
+      }
+    };
+
+    fetchUserAuctions();
+  }, [contract]);
+
+  // Format the end date
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp * 1000); // Convert to milliseconds
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  };
   return (
     <div className="Sell w-full h-full flex flex-col items-start">
       {/* Header */}
-      <div className="w-full md:w-9/12 border-b border-gray-300 py-3">
+      <div className="w-full md:max-w-6xl border-b border-gray-300 py-3">
         <h1 className="ml-4 md:ml-8 text-base sm:text-lg md:text-xl font-semibold">
           Selling
         </h1>
@@ -12,7 +53,7 @@ export const Sell = () => {
 
       {/* Main Content */}
       <div className="w-full md:w-9/12 h-full">
-        <div className="max-w-[75%] h-[32rem] relative Background-seller bg-gray-100">
+        <div className="max-w-[75%] sm:max-w-full md:max-w-[79%] h-[32rem] relative Background-seller bg-gray-100">
           <div className="bg-white py-10 px-8 w-11/12 md:w-[28%] absolute top-36 right-40 rounded-lg shadow-lg">
             <h1 className="text-lg sm:text-3xl font-bold text-gray-800">
               Make money selling on eBay
@@ -85,6 +126,40 @@ export const Sell = () => {
             You can schedule either daily or weekly payouts, and we'll deposit
             your earnings directly into your bank account.
           </p>
+        </div>
+      </div>
+
+      <div className="w-full h-full py-10 px-96 border-t border-gray-200 ">
+        <SellOptions contract={contract} provider={provider} />
+      </div>
+
+      <div className="w-full h-full max-w-[75%] sm:max-w-full md:max-w-[79%] relative p-6 bg-white rounded-lg shadow-lg items-start">
+        <h1 className="ml-4 md:ml-8 text-base sm:text-xl md:text-3xl font-bold">
+          Your sales
+        </h1>
+        <div className="flex">
+          {userAuctions.map((auction) => (
+            <div
+              className="text-base p-10 flex flex-col gap-5 items-start mx-auto"
+              key={auction.id}
+            >
+              <div className="flex flex-row items-center gap-9">
+                <h1 className="text-2xl">{auction.name}</h1>
+                <p>{formatDate(Number(auction.end))}</p>
+              </div>
+              <div>
+                <p>{auction.description}</p>
+              </div>
+              <div>
+                <p>Min Price: {web3.utils.fromWei(auction.min, "ether")}ETH</p>
+              </div>
+              <div className="w-full">
+                <button className="bg-red-400 hover:bg-gray-900 py-2 px-5 rounded-2xl text-white transition-all duration-100 ease-out">
+                  Trade
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

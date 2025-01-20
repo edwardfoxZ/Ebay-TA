@@ -6,7 +6,7 @@ import { Footer } from "./Footer";
 
 export const Main = () => {
   return (
-    <main className="Main w-full h-full flex flex-col">
+    <main className="Main w-full h-full flex flex-col custom-scrollbar">
       <header className="p-6 pt-10 sm:p-14 md:p-14 lg:p-14">
         <LinkCard
           buttonBg="bg-[#ffffff]"

@@ -20,8 +20,8 @@ contract Ebay {
         uint price;
     }
 
-    mapping(uint => Auction) public auctions;
-    mapping(uint => Offer) public offers;
+    mapping(uint => Auction) private auctions;
+    mapping(uint => Offer) private offers;
     mapping(address => uint[]) private usersAuctions;
     mapping(address => uint[]) private usersOffers;
 
@@ -51,7 +51,7 @@ contract Ebay {
             0,
             offerIds
         );
-
+        usersAuctions[msg.sender].push(nextAuctionId);
         nextAuctionId++;
     }
 
@@ -71,7 +71,7 @@ contract Ebay {
             payable(msg.sender),
             msg.value
         );
-
+        usersOffers[msg.sender].push(nextOfferId);
         nextOfferId++;
     }
 

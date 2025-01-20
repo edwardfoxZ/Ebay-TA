@@ -1,25 +1,33 @@
 import React from "react";
 import EbayLogo from "../utils/EbayLogo";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const underlineBlueForLink = "underline text-blue-500 hover:text-blue-700";
+const underlineBlueForLink =
+  "underline text-blue-500 hover:text-blue-700 cursor-pointer";
 
-export const Nav = () => {
+export const Nav = ({ onClick, account }) => {
   return (
     <nav className="w-full flex flex-col text-sm">
       {/* Top Navigation */}
       <div className="flex flex-col md:flex-row sm:text-2xl max-lg:text-[10px] md:text-xs max-lg:flex-col justify-between items-center px-4 py-3 border-b border-gray-300">
         <div className="flex items-center gap-4 md:items-center">
-          <p className="flex gap-1">
+          <div className="flex gap-1">
             Hi!
-            <a href="#" className={underlineBlueForLink}>
-              Sign in
-            </a>
-            or
-            <a href="#" className={underlineBlueForLink}>
-              register
-            </a>
-          </p>
+            {account ? (
+              <p className="underline text-sky-400">{account}</p>
+            ) : (
+              <p className="flex gap-1">
+                <a onClick={onClick} className={underlineBlueForLink}>
+                  Sign in
+                </a>
+                or
+                <a href="#" className={underlineBlueForLink}>
+                  register
+                </a>
+              </p>
+            )}
+          </div>
           <a href="#" className="hover:underline">
             Daily Deals
           </a>
@@ -54,7 +62,9 @@ export const Nav = () => {
 
       {/* Logo and Search Bar */}
       <div className="flex flex-col md:flex-row items-center justify-between px-4 py-5 gap-5 border-b border-gray-300">
-        <EbayLogo />
+        <Link to="/">
+          <EbayLogo />
+        </Link>
         <div className="flex items-center gap-3 w-full md:max-w-4xl">
           <div className="relative flex-grow max-lg:text-[10px]">
             <FaSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />

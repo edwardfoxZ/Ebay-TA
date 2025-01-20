@@ -3,6 +3,34 @@
 @tailwind utilities;
 
 html,
+body {
+  overflow: auto; /* enables scrolling if necessary */
+}
+
+body {
+  height: 100vh; /* ensure the body takes full viewport height */
+}
+
+/* Webkit-based browsers */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f4;
+  border-radius: 60px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #82b2fa;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
+
+html,
 body,
 #root {
   width: 100%;
