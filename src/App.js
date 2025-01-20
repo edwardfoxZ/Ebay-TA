@@ -4,6 +4,7 @@ import "./App.css";
 import { Main } from "./components/Main";
 import { Nav } from "./components/Nav";
 import NotFound from "./utils/NotFound";
+import { Sell } from "./pages/Sell";
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
         <header className="App-header flex flex-col items-center justify-center">
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/seller" />
-            <Route path="/buyer" />
+            <Route path="/sell" element={<Sell />} />
+            <Route path="/buy" />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </header>

@@ -2,3 +2,8 @@ body,
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.Background-seller {
+  background-image: url("https://i.ebayimg.com/00/s/NDk2WDE0NDA=/z/hcQAAOSwg2dj6n~7/$_57.JPG");
+  background-size: cover;
+}
