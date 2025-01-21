@@ -5,6 +5,7 @@ import { useFormatTime } from "../hooks/useFormatTime";
 
 export const Sell = ({ provider, contract, web3 }) => {
   const [userAuctions, setUserAuctions] = useState([]);
+  const [usersOffers, setUsersOffers] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const { formatDate } = useFormatTime();
 
@@ -19,8 +20,14 @@ export const Sell = ({ provider, contract, web3 }) => {
           const userAuctions = await contract.methods
             .getUsersAuctions(sender)
             .call();
+
+          const usersOffers = await contract.methods
+            .getUsersOffers(sender)
+            .call();
           setUserAuctions(userAuctions);
-          console.log("fetch user Auctions successfully: ", userAuctions);
+          setUsersOffers(usersOffers);
+          console.log("fetch users Auctions successfully: ", userAuctions);
+          console.log("fetch users offers successfully: ", usersOffers);
         } catch (error) {
           console.error(error);
           alert("Error fetching user Auctions", error);
@@ -152,6 +159,9 @@ export const Sell = ({ provider, contract, web3 }) => {
 
                 <p className="font-bold text-stone-800 mt-2">
                   Min Price: {web3.utils.fromWei(auction.min, "ether")} ETH
+                </p>
+                <p className="font-bold text-zinc-500 mt-2">
+                  Offers: {usersOffers}
                 </p>
 
                 <div className="w-full mt-4 flex justify-center">

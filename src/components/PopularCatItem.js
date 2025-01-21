@@ -24,7 +24,7 @@ const PopularCatItem = ({ item }) => {
         />
       </div>
       {/* Label */}
-      <div className="flex flex-col font-serif text-center text-xs sm:text-sm md:text-base lg:text-lg max-lg:text-[10px] mt-3">
+      <div className="flex flex-col font-serif text-center text-xs sm:text-sm md:text-sm lg:text-lg max-lg:text-[10px] mt-3">
         {item.category}
         <span
           className={`border-[1px] border-black mt-1 ${

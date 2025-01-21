@@ -7,7 +7,7 @@ import { Footer } from "./Footer";
 export const Main = () => {
   return (
     <main className="Main w-full h-full flex flex-col custom-scrollbar">
-      <header className="p-6 pt-10 sm:p-14 md:p-14 lg:p-14">
+      <header className="p-6 pt-10 sm:p-14 md:p-14 lg:p-14 max-lg:p-0">
         <LinkCard
           buttonBg="bg-[#ffffff]"
           buttonHv="hover:bg-[#f5f5f5] text-black"
@@ -24,7 +24,7 @@ export const Main = () => {
           <PopularCat />
         </div>
 
-        <div className="flex flex-col gap-10">
+        <div className="flex max-lg:max-w-full flex-col gap-10">
           <LinkCard
             buttonBg="bg-[#ffffff]"
             buttonHv="hover:bg-[#f5f5f5] text-black"

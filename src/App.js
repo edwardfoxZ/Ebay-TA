@@ -32,9 +32,10 @@ function App() {
           console.error("Deployment network is not correct");
           return;
         }
+
         const contract = new web3.eth.Contract(
           EbayAbi.abi,
-          deploymentNetwork && deploymentNetwork.address
+          deploymentNetwork.address
         );
         const accounts = await web3.eth.getAccounts();
 
@@ -45,38 +46,75 @@ function App() {
           account: accounts[0],
         });
       } catch (error) {
-        console.error("failed to connect to provider: ", error);
+        console.error("Failed to connect to provider: ", error);
       }
     } else {
-      alert("Please Install metamask wallet!");
+      alert("Please install MetaMask wallet!");
     }
   };
 
   useEffect(() => {
-    const checkChangedAccount = async () => {
+    if (window.ethereum) {
+      handleLogin();
+    }
+  }, []);
+
+  useEffect(() => {
+    const setupAccountChangeListener = async () => {
       const provider = await detectEthereumProvider();
       if (provider) {
-        window.ethereum.on("accountChanged", (accounts) => {
+        window.ethereum.on("accountsChanged", async (accounts) => {
           if (accounts.length > 0) {
+            console.log("Account changed to:", accounts[0]);
             setWeb3Api((prevStates) => ({
               ...prevStates,
               account: accounts[0],
             }));
           } else {
+            console.log("No account connected");
             setWeb3Api((prevStates) => ({
               ...prevStates,
               account: null,
             }));
           }
         });
+      } else {
+        console.error("MetaMask provider not found.");
       }
     };
 
-    checkChangedAccount();
-    if (window.ethereum) {
-      handleLogin();
-    }
-  }, [web3Api.provider]);
+    setupAccountChangeListener();
+
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener("accountsChanged", () => {});
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const reinitializeWeb3 = async () => {
+      if (web3Api.provider && web3Api.account) {
+        const web3 = new Web3(web3Api.provider);
+        const networkId = await web3.eth.net.getId();
+        const deploymentNetwork = EbayAbi.networks[networkId];
+        if (deploymentNetwork) {
+          const contract = new web3.eth.Contract(
+            EbayAbi.abi,
+            deploymentNetwork.address
+          );
+          setWeb3Api((prevStates) => ({
+            ...prevStates,
+            web3: web3,
+            contract: contract,
+          }));
+        }
+      }
+    };
+
+    reinitializeWeb3();
+  }, [web3Api.account]);
+
   return (
     <Router>
       <div className="App flex flex-col min-h-screen">
