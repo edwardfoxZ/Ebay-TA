@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Web3 } from "web3";
 
-export const SellOptions = ({ provider, contract }) => {
+export const SellOptions = ({ provider, contract, refresh, setRefresh }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [minPrice, setMinPrice] = useState("");
@@ -27,6 +27,7 @@ export const SellOptions = ({ provider, contract }) => {
         .send({ from: sender });
 
       alert("Auction created successfully!");
+      setRefresh(!refresh);
     } catch (error) {
       console.error(error);
       alert("Error creating auction.", error);
@@ -80,7 +81,7 @@ export const SellOptions = ({ provider, contract }) => {
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="Enter duration in days (1-10)"
+          placeholder="Enter duration in days (2-9)"
         />
       </div>
       <button

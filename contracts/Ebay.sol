@@ -91,7 +91,7 @@ contract Ebay {
 
     function getAuctions() external view returns (Auction[] memory) {
         Auction[] memory _auctions = new Auction[](nextAuctionId - 1);
-        for (uint i = 1; i < nextAuctionId - 1; i++) {
+        for (uint i = 1; i < nextAuctionId; i++) {
             _auctions[i - 1] = auctions[i];
         }
         return (_auctions);

@@ -8,6 +8,7 @@ import { Nav } from "./components/Nav";
 import NotFound from "./utils/NotFound";
 import { Sell } from "./pages/Sell";
 import Web3 from "web3";
+import { Buy } from "./pages/Buy";
 
 function App() {
   const [web3Api, setWeb3Api] = useState({
@@ -86,10 +87,23 @@ function App() {
             <Route
               path="/sell"
               element={
-                <Sell contract={web3Api.contract} provider={web3Api.provider} />
+                <Sell
+                  contract={web3Api.contract}
+                  provider={web3Api.provider}
+                  web3={web3Api.web3}
+                />
               }
             />
-            <Route path="/buy" />
+            <Route
+              path="/buy"
+              element={
+                <Buy
+                  contract={web3Api.contract}
+                  provider={web3Api.provider}
+                  web3={web3Api.web3}
+                />
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </header>
